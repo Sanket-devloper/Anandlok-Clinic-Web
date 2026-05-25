@@ -1,0 +1,1 @@
+var e=`/assets/About%20us%20hero%20section-BUyIEiW3.webp`;export{e as t};
