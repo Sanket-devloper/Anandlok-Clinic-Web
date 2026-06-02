@@ -15,6 +15,7 @@ import {
   Wind,
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import ProgressiveImage from "@/components/ProgressiveImage";
 import { cn } from "@/lib/utils";
 import heroBg from "@/assets/hero-bg.webp";
 
@@ -378,7 +379,14 @@ const ProgramsTreatmentLayout = () => {
           <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch mb-8 md:mb-10">
             <div className="premium-card !p-0 overflow-hidden">
               <div className="relative min-h-[18rem] md:min-h-[22rem] bg-[#355E3B]">
-                <img src={heroBg} alt="Ayurvedic Panchakarma" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+                <ProgressiveImage
+                  src={heroBg}
+                  alt="Ayurvedic Panchakarma"
+                  className="object-cover opacity-35"
+                  wrapperClassName="absolute inset-0"
+                  priority
+                  placeholderLabel="Loading banner image"
+                />
                 <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(53,94,59,0.96),rgba(122,92,62,0.78))]" />
                 <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-8 text-[#FAF8F3]">
                   <p className="text-[0.72rem] font-semibold uppercase tracking-[0.35em] text-[#FAF8F3]/80">Special Programs</p>
@@ -504,7 +512,14 @@ const ProgramsTreatmentLayout = () => {
             <div className="space-y-6">
               <article className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-[0_30px_80px_-32px_rgba(53,94,59,0.28)]">
                 <div className="relative min-h-[18rem] overflow-hidden bg-[#355E3B]">
-                  <img src={heroBg} alt="Panchakarma therapy banner" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+                  <ProgressiveImage
+                    src={heroBg}
+                    alt="Panchakarma therapy banner"
+                    className="object-cover opacity-30"
+                    wrapperClassName="absolute inset-0"
+                    priority
+                    placeholderLabel="Loading banner image"
+                  />
                   <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(53,94,59,0.96),rgba(122,92,62,0.78))]" />
                   <div className="absolute -right-12 top-8 h-44 w-44 rounded-full border border-white/20 bg-white/10 blur-[0.5px]" />
                   <div className="absolute -left-10 bottom-4 h-36 w-36 rounded-full border border-white/20 bg-[#c8a96b]/10" />
@@ -530,11 +545,12 @@ const ProgramsTreatmentLayout = () => {
 
                   <section className="relative overflow-hidden rounded-[1.5rem] border border-border/60 bg-white/85 min-h-[300px]">
                     {activeTreatmentImage ? (
-                      <img
+                      <ProgressiveImage
                         src={activeTreatmentImage}
                         alt={active.detail.heading}
-                        className="absolute inset-0 h-full w-full object-cover"
-                        loading="lazy"
+                        className="object-cover"
+                        wrapperClassName="absolute inset-0"
+                        placeholderLabel="Loading treatment image"
                       />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-[#d0d0d0] bg-[#f5f5f5]">

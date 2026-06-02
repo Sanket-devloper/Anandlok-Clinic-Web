@@ -2,22 +2,48 @@ import { awardsData } from "@/lib/placeholders";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 const achievementImageSources = import.meta.glob("../assets/achievements/*.webp", {
   eager: true,
   import: "default",
 }) as Record<string, string>;
 
-const achievementImageUrlsByYear = Object.entries(achievementImageSources).reduce<Record<string, string>>((accumulator, [path, imageUrl]) => {
-  const fileName = path.split("/").pop() ?? "";
-  const yearKey = fileName.replace(/^award-/, "").replace(/\.webp$/i, "");
+const achievementSubtitles: Record<string, string> = {
+  "award-2024(2)": "Ba and bapu Award 2024",
+  "award-2024(1)": "Ayurveda Rathyatra Award 2024",
+  "award-2022(2)": "Ayurveda Parwa Award 2022",
+  "award-2022(3)": "Dhanwantari Award by Arogya Bharti 2022",
+  "award-2022(1)": "Gramrogya swarajya corona warrior Award 2022",
+  "award-2026": "Narishakti Sanman Award 2026",
+  "award-2025": "Sakal Prabahvshali Ayurvedacharya Award 2025",
+  "award-2024": "VD P.T Joshi Ayurveda Ratna Award 2024",
+  "award-2021": "Ayurmani Rural Health Award 2021",
+  "award-2020": "Sansthamitra Award 2020",
+  "award-2017": "Ayurved Pariwar Dhanwantari Award 2017",
+  "award-2014": "VD.Khadiwale Award 2014",
+  "award-2024(3)": "Gurusmaran Award 2024",
+};
 
-  if (yearKey) {
-    accumulator[yearKey] = imageUrl;
-  }
+const achievementCards = Object.entries(achievementImageSources)
+  .map(([path, imageUrl]) => {
+    const fileName = path.split("/").pop() ?? "";
+    const imageBaseName = fileName.replace(/\.webp$/i, "");
+    const titleMatch = imageBaseName.match(/^award-(\d{4})(?:\((\d+)\))?$/i);
+    const yearMatch = fileName.match(/award-(\d{4})/i);
+    // Use only the year for the displayed title (e.g., "Award 2024")
+    const title = titleMatch ? `Award ${titleMatch[1]}` : imageBaseName.replace(/^award-/i, "Award ");
 
-  return accumulator;
-}, {});
+    return {
+      title: title || "Award Placeholder",
+      subtitle: achievementSubtitles[imageBaseName] ?? "",
+      year: yearMatch?.[1] ?? "",
+      imageUrl,
+      fileName,
+    };
+  })
+  .filter((award) => award.year !== "2023")
+  .sort((left, right) => Number(right.year) - Number(left.year) || left.fileName.localeCompare(right.fileName, undefined, { numeric: true }));
 
 type AchievementsSectionProps = {
   limit?: number;
@@ -26,14 +52,9 @@ type AchievementsSectionProps = {
 
 const AchievementsSection = ({ limit, showViewAll = false }: AchievementsSectionProps) => {
   const { ref, isVisible } = useScrollAnimation();
-  const sortedAwards = [...awardsData].sort((left, right) => Number(right.year) - Number(left.year));
-  const visibleAwards = typeof limit === "number" ? sortedAwards.slice(0, limit) : sortedAwards;
+  const visibleAwards = typeof limit === "number" ? achievementCards.slice(0, limit) : achievementCards;
 
-  const getAchievementImage = (awardYear: string) => {
-    return achievementImageUrlsByYear[awardYear] ?? null;
-  };
-
-  const renderAwardImage = (awardTitle: string, imageUrl: string | null) => {
+  const renderAwardImage = (awardTitle: string, imageUrl: string) => {
     if (!imageUrl) {
       return (
         <div className="aspect-[4/3] bg-gradient-to-br from-primary/10 via-secondary to-gold/10 flex items-center justify-center relative overflow-hidden group">
@@ -45,7 +66,13 @@ const AchievementsSection = ({ limit, showViewAll = false }: AchievementsSection
 
     return (
       <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
-        <img src={imageUrl} alt={awardTitle} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+        <ProgressiveImage
+          src={imageUrl}
+          alt={awardTitle}
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          wrapperClassName="h-full w-full"
+          placeholderLabel="Loading award image"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
       </div>
     );
@@ -76,16 +103,20 @@ const AchievementsSection = ({ limit, showViewAll = false }: AchievementsSection
                 {[0, 1].map((copyIdx) => (
                   <div key={copyIdx} className="flex gap-6 pr-6 shrink-0" aria-hidden={copyIdx === 1}>
                     {visibleAwards.map((award) => (
-                      <article key={`${copyIdx}-${award.title}-${award.year}`} className="premium-card !p-0 overflow-hidden w-[300px] md:w-[340px] flex flex-col shrink-0 group">
-                        {renderAwardImage(award.title, getAchievementImage(award.year))}
+                      <article key={`${copyIdx}-${award.fileName}`} className="premium-card !p-0 overflow-hidden w-[300px] md:w-[340px] flex flex-col shrink-0 group">
+                        {renderAwardImage(award.title, award.imageUrl)}
                         <div className="p-6 flex-1 flex flex-col justify-between">
                           <div>
                             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-3">{award.year}</p>
                             <h3 className="font-serif text-base md:text-lg font-semibold text-foreground mb-3 leading-snug">
                               {award.title}
                             </h3>
+                            {award.subtitle ? (
+                              <p className="text-sm leading-6 text-muted-foreground">
+                                {award.subtitle}
+                              </p>
+                            ) : null}
                           </div>
-                          {award.note && <p className="text-sm text-muted-foreground leading-relaxed">{award.note}</p>}
                         </div>
                       </article>
                     ))}
@@ -106,14 +137,12 @@ const AchievementsSection = ({ limit, showViewAll = false }: AchievementsSection
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {visibleAwards.map((award) => (
-              <article key={`${award.title}-${award.year}`} className="premium-card !p-0 overflow-hidden group">
-                {renderAwardImage(award.title, getAchievementImage(award.year))}
+              <article key={award.fileName} className="premium-card !p-0 overflow-hidden group">
+                {renderAwardImage(award.title, award.imageUrl)}
                 <div className="p-6">
                   <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">{award.year}</p>
-                  <h3 className="font-serif text-lg font-semibold text-foreground mb-2 leading-snug">
-                    {award.title}
-                  </h3>
-                  {award.note && <p className="text-sm text-muted-foreground">{award.note}</p>}
+                  <h3 className="font-serif text-lg font-semibold text-foreground mb-2 leading-snug">{award.title}</h3>
+                  {award.subtitle ? <p className="text-sm leading-6 text-muted-foreground">{award.subtitle}</p> : null}
                 </div>
               </article>
             ))}

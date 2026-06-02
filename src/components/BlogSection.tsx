@@ -1,6 +1,7 @@
 import { ArrowRight, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import blogThumbnail from "@/assets/blog-thumbnail.webp";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 type Blog = { slug: string; title: string; excerpt: string; date?: string; tag?: string; thumbnail?: string };
 
@@ -28,11 +29,12 @@ const BlogSection = ({ posts }: { posts?: Blog[] }) => {
           {(posts ?? defaultBlogs).map((b) => (
             <Link key={b.slug} to={`/blog/${b.slug}`} className="premium-card group !p-0 overflow-hidden">
               <div className="h-48 bg-gradient-to-br from-primary/10 via-secondary to-gold/10 flex items-center justify-center relative overflow-hidden">
-                <img
+                <ProgressiveImage
                   src={b.thumbnail ?? blogThumbnail}
                   alt={b.title}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  loading="lazy"
+                  className="object-cover"
+                  wrapperClassName="absolute inset-0"
+                  placeholderLabel="Loading blog image"
                 />
               </div>
               <div className="p-6">

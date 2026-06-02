@@ -2,6 +2,7 @@ import doctor1 from "@/assets/doctor-1.webp";
 import doctor2 from "@/assets/doctor-2.webp";
 import doctor3 from "@/assets/doctor-3.webp";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 const doctors = [
   {
@@ -56,13 +57,14 @@ const DoctorsSection = () => {
               style={{ transitionDelay: `${i * 150 + 200}ms` }}
             >
               <div className="relative mb-5 mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-secondary group-hover:border-gold/40 transition-colors duration-500 shadow-lg">
-                <img
+                <ProgressiveImage
                   src={d.image}
                   alt={d.name}
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  wrapperClassName="h-full w-full"
                   width={512}
                   height={640}
+                  placeholderLabel="Loading doctor photo"
                 />
               </div>
               <h3 className="font-serif text-xl font-semibold text-foreground mb-1">{d.name}</h3>

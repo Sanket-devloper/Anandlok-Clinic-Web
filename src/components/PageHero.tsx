@@ -1,4 +1,5 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 type PageHeroProps = {
   image: string;
@@ -18,15 +19,18 @@ const PageHero = ({ image, eyebrow, title, subtitle }: PageHeroProps) => {
       }`}
     >
       <div className="absolute inset-0">
-        <img
+        <ProgressiveImage
           src={image}
           alt={title}
-          className={`h-full w-full object-cover transition-transform ease-out will-change-transform motion-reduce:transform-none ${
+          className={`object-cover transition-transform ease-out will-change-transform motion-reduce:transform-none ${
             isVisible ? "scale-100" : "scale-110"
           }`}
           style={{ transitionDuration: "1800ms" }}
+          wrapperClassName="absolute inset-0"
           width={1920}
           height={1080}
+          priority
+          placeholderLabel="Loading page image"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/40 to-foreground/70" />
       </div>

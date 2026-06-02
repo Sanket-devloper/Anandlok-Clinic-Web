@@ -1,5 +1,6 @@
 import aboutImg from "@/assets/New about us.webp";
 import { Leaf } from "lucide-react";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 type Props = {
   eyebrow?: string;
@@ -24,13 +25,14 @@ const AboutSection = ({ eyebrow, heading, paragraphs, features, variant = "compa
                   : "min-h-[320px] md:min-h-[480px] lg:min-h-[520px]"
               }`}
             >
-              <img
+              <ProgressiveImage
                 src={aboutImg}
                 alt="Anandlok Ayurveda treatment room"
-                className="w-full h-full object-cover"
-                loading="lazy"
+                className="object-cover"
+                wrapperClassName="h-full w-full"
                 width={800}
                 height={600}
+                placeholderLabel="Loading about image"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-primary/10 -z-10 hidden md:block" />

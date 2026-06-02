@@ -155,7 +155,6 @@ export const awardsData = [
   { title: "Ayurveda Pariwar Dhanwantrin Award", year: "2017" },
   { title: "Ayurmani Rural Health and Ayurveda", year: "2021" },
   { title: "Arogya Bharti Award", year: "2022" },
-  { title: "Ba and Bapu Award", year: "2023", note: "Community Wellness" },
   { title: "Deepsthambha Yuva Preerna Award", year: "2016" },
   { title: "Sakal Prabhavshali Ayurvedacharya Award", year: "2025" },
   { title: "Vd. Pt Joshi Awardratna Award", year: "2024" },

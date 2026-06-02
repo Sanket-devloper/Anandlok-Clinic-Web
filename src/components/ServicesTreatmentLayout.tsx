@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import ProgressiveImage from "@/components/ProgressiveImage";
 import { cn } from "@/lib/utils";
 import heroBg from "@/assets/hero-bg.webp";
 import clinicPhoto from "@/assets/about-clinic.webp";
@@ -540,7 +541,14 @@ const ServicesTreatmentLayout = () => {
             <div className="space-y-6">
               <article className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-[0_30px_80px_-32px_rgba(53,94,59,0.28)]">
                 <div className="relative min-h-[24rem] overflow-hidden bg-[#355E3B]">
-                  <img src={heroBg} alt="Ayurvedic banner" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+                  <ProgressiveImage
+                    src={heroBg}
+                    alt="Ayurvedic banner"
+                    className="object-cover opacity-35"
+                    wrapperClassName="absolute inset-0"
+                    priority
+                    placeholderLabel="Loading banner image"
+                  />
                   <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(53,94,59,0.96),rgba(122,92,62,0.78))]" />
                   <div className="absolute -right-12 top-8 h-44 w-44 rounded-full border border-white/20 bg-white/10 blur-[0.5px]" />
                   <div className="absolute -left-10 bottom-4 h-36 w-36 rounded-full border border-white/20 bg-[#c8a96b]/10" />
@@ -564,7 +572,13 @@ const ServicesTreatmentLayout = () => {
                       <div className="absolute inset-y-8 left-10 right-6 rounded-[2rem] bg-white/12 blur-2xl" />
                       <div className="relative w-full max-w-[30rem] overflow-hidden rounded-[2rem] border border-white/20 bg-white/10 p-3 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.45)] backdrop-blur-sm">
                         <div className="relative overflow-hidden rounded-[1.5rem] bg-[#f5ebdd]">
-                          <img src={topImage} alt={active.detail.heading} className="h-[20rem] w-full object-cover md:h-[24rem]" />
+                            <ProgressiveImage
+                              src={topImage}
+                              alt={active.detail.heading}
+                              className="object-cover md:h-[24rem]"
+                              wrapperClassName="h-[20rem] w-full"
+                              placeholderLabel="Loading treatment image"
+                            />
                           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(53,94,59,0.08),rgba(53,94,59,0.38))]" />
                           <div className="absolute left-4 top-4 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-primary shadow-lg">
                             Authentic Ayurveda
@@ -675,7 +689,7 @@ const ServicesTreatmentLayout = () => {
                   <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
                     <div className="rounded-[1.75rem] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(250,248,243,0.98))] p-6 shadow-[0_18px_40px_-28px_rgba(53,94,59,0.32)]">
                       <p className="text-[0.72rem] font-semibold uppercase tracking-[0.35em] text-primary/85">{activeItem.shortTitle}</p>
-                      <h3 className="mt-3 text-2xl font-semibold text-foreground md:text-3xl">Visual preview</h3>
+                      <h3 className="mt-3 text-2xl font-semibold text-foreground md:text-3xl">Treatment Approach</h3>
                       <p className="mt-4 text-sm leading-7 text-muted-foreground md:text-[0.96rem]">
                         {active.detail.subtitle}
                       </p>
@@ -692,7 +706,13 @@ const ServicesTreatmentLayout = () => {
 
                     <div className="overflow-hidden rounded-[1.75rem] border border-border/70 bg-white shadow-[0_18px_40px_-24px_rgba(53,94,59,0.35)]">
                       <div className="relative">
-                        <img src={serviceImage} alt={active.detail.heading} className="h-[22rem] w-full object-cover md:h-[26rem]" loading="lazy" />
+                        <ProgressiveImage
+                          src={serviceImage}
+                          alt={active.detail.heading}
+                          className="object-cover md:h-[26rem]"
+                          wrapperClassName="h-[22rem] w-full"
+                          placeholderLabel="Loading treatment image"
+                        />
                         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(53,94,59,0.06),rgba(53,94,59,0.42))]">
                           
                         </div>

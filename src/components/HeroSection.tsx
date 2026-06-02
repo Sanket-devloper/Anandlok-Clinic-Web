@@ -1,18 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import BookAppointmentDialog from "@/components/BookAppointmentDialog";
+import ProgressiveImage from "@/components/ProgressiveImage";
 import heroBg from "@/assets/hero-bg.webp";
 
 const HeroSection = () => {
   return (
     <section id="home" className="relative min-h-[80vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
-        <img
+        <ProgressiveImage
           src={heroBg}
           alt="Ayurvedic healing environment"
-          className="w-full h-full object-cover"
+          className="object-cover"
+          wrapperClassName="absolute inset-0"
           width={1920}
           height={1080}
+          priority
+          placeholderLabel="Loading hero image"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/40 to-foreground/70" />
       </div>
@@ -35,7 +39,7 @@ const HeroSection = () => {
           className="text-primary-foreground/80 text-base sm:text-lg md:text-xl mb-4 font-light animate-fade-up"
           style={{ animationDelay: "0.6s" }}
         >
-          Multi Specialty Hospital
+          Wellness Hospital
         </p>
 
         <p

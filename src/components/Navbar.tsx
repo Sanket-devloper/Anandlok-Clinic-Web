@@ -3,6 +3,7 @@ import { Menu, X, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import BookAppointmentDialog from "@/components/BookAppointmentDialog";
+import ProgressiveImage from "@/components/ProgressiveImage";
 import logo from "@/assets/logo.webp";
 
 const navLinks = [
@@ -23,10 +24,13 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4">
         <Link to="/" className="flex items-center min-w-0 shrink-0">
-          <img
+          <ProgressiveImage
             src={logo}
             alt="Anandlok Ayurveda"
             className="h-32 w-auto max-w-[360px] object-contain md:h-[6rem] lg:h-[7rem]"
+            wrapperClassName="shrink-0"
+            placeholderLabel="Loading logo"
+            priority
           />
         </Link>
 

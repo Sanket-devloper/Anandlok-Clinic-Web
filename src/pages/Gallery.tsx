@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/button";
+import ProgressiveImage from "@/components/ProgressiveImage";
 import { Camera, Play, X, ChevronLeft, ChevronRight } from "lucide-react";
 import galleryHero from "@/assets/Gallery hero section.webp";
 import Seo from "@/components/Seo";
@@ -279,11 +280,23 @@ const GalleryPage = () => {
                   >
                     {/* Photo */}
                     {isPhoto ? (
-                      <img src={item.src} alt={item.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                      <ProgressiveImage
+                        src={item.src}
+                        alt={item.title}
+                        className="object-cover"
+                        wrapperClassName="absolute inset-0"
+                        placeholderLabel="Loading gallery image"
+                      />
                     ) : null}
 
                     {isNews ? (
-                      <img src={item.src} alt={item.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                      <ProgressiveImage
+                        src={item.src}
+                        alt={item.title}
+                        className="object-cover"
+                        wrapperClassName="absolute inset-0"
+                        placeholderLabel="Loading gallery image"
+                      />
                     ) : null}
 
                     {/* Inline YouTube embed for videos */}
@@ -343,7 +356,13 @@ const GalleryPage = () => {
                 </button>
 
                 <div className="max-h-full max-w-full mx-auto">
-                  <img src={current.src} alt={current.title} className="max-h-[90vh] max-w-[90vw] object-contain" />
+                  <ProgressiveImage
+                    src={current.src}
+                    alt={current.title}
+                    className="max-h-[90vh] max-w-[90vw] object-contain"
+                    wrapperClassName="flex items-center justify-center"
+                    placeholderLabel="Loading image"
+                  />
                 </div>
 
                 <button

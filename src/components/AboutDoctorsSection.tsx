@@ -1,4 +1,5 @@
 import { aboutDoctorsData } from "@/lib/placeholders";
+import ProgressiveImage from "@/components/ProgressiveImage";
 import doctor1 from "@/assets/doctor-1.webp";
 import doctor2 from "@/assets/doctor-2.webp";
 import doctor3 from "@/assets/doctor-3.webp";
@@ -39,13 +40,14 @@ const AboutDoctorsSection = () => {
               <div className="mb-5 overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/10 via-secondary to-gold/10">
                 <div className="aspect-square flex items-center justify-center">
                   {doctorImage ? (
-                    <img
+                    <ProgressiveImage
                       src={doctorImage}
                       alt={doctor.name}
-                      className="h-full w-full object-cover object-top"
-                      loading="lazy"
+                      className="object-cover object-top"
+                      wrapperClassName="h-full w-full"
                       width={512}
                       height={640}
+                      placeholderLabel="Loading doctor photo"
                     />
                   ) : (
                     <div className="text-center">

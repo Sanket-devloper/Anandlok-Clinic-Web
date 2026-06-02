@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
+import ProgressiveImage from "@/components/ProgressiveImage";
 import footerLogo from "@/assets/footer logo.webp";
 
 const footerLinks = [
@@ -29,10 +30,13 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-              <img
+              <ProgressiveImage
                 src={footerLogo}
                 alt="Anandlok Footer Logo"
                 className="h-12 w-12 rounded-2xl object-cover shadow-md ring-1 ring-primary-foreground/10 brightness-200"
+                wrapperClassName="h-12 w-12 shrink-0"
+                placeholderLabel="Loading footer logo"
+                priority
               />
               <span className="font-serif text-xl font-semibold">Anandlok Ayurveda</span>
             </div>
