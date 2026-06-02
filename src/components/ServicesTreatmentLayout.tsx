@@ -20,7 +20,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import ProgressiveImage from "@/components/ProgressiveImage";
 import { cn } from "@/lib/utils";
 import heroBg from "@/assets/hero-bg.webp";
-import clinicPhoto from "@/assets/about-clinic.webp";
+import clinicPhoto from "@/assets/New about us.webp";
 
 const serviceImageSources = import.meta.glob("../assets/services/*.webp", {
   eager: true,
