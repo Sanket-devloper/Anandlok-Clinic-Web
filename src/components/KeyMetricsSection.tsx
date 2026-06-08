@@ -1,4 +1,4 @@
-import { Heart, Users, Clock, Leaf } from "lucide-react";
+import { Users, Clock, Leaf } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useCounter } from "@/hooks/use-counter";
 
@@ -8,6 +8,7 @@ type Metric = {
   suffix: string;
   label: string;
   description: string;
+  display?: string;
 };
 
 const MetricCard = ({ metric, shouldStart }: { metric: Metric; shouldStart: boolean }) => {
@@ -25,8 +26,14 @@ const MetricCard = ({ metric, shouldStart }: { metric: Metric; shouldStart: bool
 
         <div className="mb-2">
           <p className="text-3xl sm:text-4xl font-bold text-foreground">
-            {count}
-            {metric.suffix}
+            {metric.display ? (
+              metric.display
+            ) : (
+              <>
+                {count}
+                {metric.suffix}
+              </>
+            )}
           </p>
         </div>
 
@@ -81,17 +88,11 @@ const KeyMetricsSection = () => {
     },
     {
       icon: Clock,
-      numericValue: 45000,
+      numericValue: 350000,
       suffix: "+",
       label: "Consultations",
       description: "Personalized Ayurvedic consultations and treatment sessions",
-    },
-    {
-      icon: Heart,
-      numericValue: 92,
-      suffix: "%",
-      label: "Recovery Success",
-      description: "Positive health outcomes and patient transformation",
+      display: "3.5+ lakhs",
     },
     {
       icon: Leaf,
@@ -115,7 +116,7 @@ const KeyMetricsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {metrics.map((metric, index) => (
             <MetricCard key={index} metric={metric} shouldStart={isVisible} />
           ))}
