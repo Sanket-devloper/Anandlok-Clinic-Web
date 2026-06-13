@@ -17,7 +17,7 @@ const Index = () => {
   return (
     <div className="min-h-screen scroll-smooth">
       <Seo
-        title="Ayurveda Hospital in Nagpur"
+        fullTitle="Anandlok Ayurveda | Best Ayurveda & Panchakarma Wellness Hospital in Nagpur"
         description="Authentic Panchakarma, Ayurvedic treatments, yoga, meditation, wellness care, and experienced doctors in Nagpur."
         canonicalPath="/"
       />

@@ -4,14 +4,15 @@ import { buildCanonicalUrl, siteConfig } from "@/lib/site";
 
 type SeoProps = {
   title?: string;
+  fullTitle?: string;
   description?: string;
   noIndex?: boolean;
   canonicalPath?: string;
 };
 
-const Seo = ({ title, description, noIndex = false, canonicalPath }: SeoProps) => {
+const Seo = ({ title, fullTitle, description, noIndex = false, canonicalPath }: SeoProps) => {
   const location = useLocation();
-  const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.defaultTitle;
+  const pageTitle = fullTitle ?? (title ? `${title} | ${siteConfig.name}` : siteConfig.defaultTitle);
   const pageDescription = description ?? siteConfig.defaultDescription;
   const canonicalUrl = buildCanonicalUrl(canonicalPath ?? location.pathname);
 
@@ -35,8 +36,13 @@ const Seo = ({ title, description, noIndex = false, canonicalPath }: SeoProps) =
     ensureMetaTag('meta[property="og:title"]', { property: "og:title", content: pageTitle });
     ensureMetaTag('meta[property="og:description"]', { property: "og:description", content: pageDescription });
     ensureMetaTag('meta[property="og:type"]', { property: "og:type", content: "website" });
+    ensureMetaTag('meta[property="og:url"]', { property: "og:url", content: canonicalUrl });
+    ensureMetaTag('meta[property="og:image"]', { property: "og:image", content: siteConfig.shareImage });
     ensureMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: pageTitle });
     ensureMetaTag('meta[name="twitter:description"]', { name: "twitter:description", content: pageDescription });
+    ensureMetaTag('meta[name="twitter:url"]', { name: "twitter:url", content: canonicalUrl });
+    ensureMetaTag('meta[name="twitter:image"]', { name: "twitter:image", content: siteConfig.shareImage });
+    ensureMetaTag('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
