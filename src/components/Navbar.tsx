@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import BookAppointmentDialog from "@/components/BookAppointmentDialog";
 import ProgressiveImage from "@/components/ProgressiveImage";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 
 const navLinks = [
   { label: "Home", to: "/" },
