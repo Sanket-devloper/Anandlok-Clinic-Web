@@ -1,7 +1,7 @@
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProgressiveImage from "@/components/ProgressiveImage";
-import footerLogo from "@/assets/footer logo.webp";
+import footerLogo from "@/assets/logo.png";
 
 const footerLinks = [
   { label: "Home", to: "/" },

@@ -81,10 +81,10 @@ const KeyMetricsSection = () => {
   const metrics: Metric[] = [
     {
       icon: Users,
-      numericValue: 18000,
+      numericValue: 80000,
       suffix: "+",
-      label: "Patients Treated",
-      description: "Successfully guided through holistic wellness and recovery",
+      label: "Patients Consulted",
+      description: "Under the UTURN Lifestyle Disease Reversal Program",
     },
     {
       icon: Clock,
